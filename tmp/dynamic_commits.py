@@ -28,11 +28,16 @@ def run(csv_file: str|Path,
                                str(row['ventana_id'])) 
         shutil.move(src_dir, dst_dir)
         # print(f"Directory '{src_dir}' moved to '{dst_dir}' successfully.")
-        command = 'git add . &&' + f'git commit -m "data {row['video_id']} {row['ventana_id']}" &&' + 'git push'
-        # command = 'ffmpeg -i "{}" -ab 160k -ac 2 -ar 44100 -vn "{}"'.format(mp4_file, mp3_file)
+        command = 'git add .' 
         subprocess.call(command, shell=True) #Keep shell True because produce errors
+
+        command = f'git commit -m "data {row['video_id']} {row['ventana_id']}"'
+        subprocess.call(command, shell=True) #Keep shell True because produce errors
+
+        command = 'git push'
+        subprocess.call(command, shell=True) #Keep shell True because produce errors
+
         # break
-        # print(folder_name)
 
 
 def main(args):
