@@ -19,7 +19,7 @@ def run(csv_file: str|Path,
 
 
     df = pd.read_csv(input_dir / csv_file)
-    for i, row in df.iterrows():
+    for i, row in tqdm(df.iterrows()):
         src_dir = input_dir / (str(row['video_id']) +
                                '_' +
                                str(row['ventana_id']))
@@ -27,11 +27,11 @@ def run(csv_file: str|Path,
                                '_' +
                                str(row['ventana_id'])) 
         shutil.move(src_dir, dst_dir)
-        print(f"Directory '{src_dir}' moved to '{dst_dir}' successfully.")
+        # print(f"Directory '{src_dir}' moved to '{dst_dir}' successfully.")
         command = 'git add . &&' + f'git commit -m "data {row['video_id']} {row['ventana_id']}" &&' + 'git push'
         # command = 'ffmpeg -i "{}" -ab 160k -ac 2 -ar 44100 -vn "{}"'.format(mp4_file, mp3_file)
         subprocess.call(command, shell=True) #Keep shell True because produce errors
-        break
+        # break
         # print(folder_name)
 
 
