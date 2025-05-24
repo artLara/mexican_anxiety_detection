@@ -29,13 +29,19 @@ def run(csv_file: str|Path,
         shutil.move(src_dir, dst_dir)
         # print(f"Directory '{src_dir}' moved to '{dst_dir}' successfully.")
         command = 'git add .' 
-        subprocess.call(command, shell=True) #Keep shell True because produce errors
+        # subprocess.call(command, shell=True) #Keep shell True because produce errors
+        p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        p.wait()
 
         command = f'git commit -m "data {row['video_id']} {row['ventana_id']}"'
-        subprocess.call(command, shell=True) #Keep shell True because produce errors
+        # subprocess.call(command, shell=True) #Keep shell True because produce errors
+        p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        p.wait()
 
+        
         command = 'git push'
-        p = subprocess.call(command, shell=True) #Keep shell True because produce errors
+        # p = subprocess.call(command, shell=True) #Keep shell True because produce errors
+        p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         p.wait()
         # break
 
