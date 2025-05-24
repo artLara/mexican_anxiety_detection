@@ -35,8 +35,8 @@ def run(csv_file: str|Path,
         subprocess.call(command, shell=True) #Keep shell True because produce errors
 
         command = 'git push'
-        subprocess.call(command, shell=True) #Keep shell True because produce errors
-
+        p = subprocess.call(command, shell=True) #Keep shell True because produce errors
+        p.wait()
         # break
 
 
