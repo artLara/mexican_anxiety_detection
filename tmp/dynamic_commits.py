@@ -26,6 +26,13 @@ def run(csv_file: str|Path,
         dst_dir = output_dir / (str(row['video_id']) +
                                '_' +
                                str(row['ventana_id'])) 
+        
+        if not src_dir.is_dir(): #dir is not in src
+            continue
+
+        if dst_dir.is_dir(): #already exists
+            continue
+
         shutil.move(src_dir, dst_dir)
         # print(f"Directory '{src_dir}' moved to '{dst_dir}' successfully.")
         command = 'git add .' 
