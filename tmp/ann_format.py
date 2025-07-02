@@ -7,10 +7,9 @@ import argparse
 
 def run(csv_file: str|Path,
         output_dir: str|Path) -> None:
-    """Move clips of videos and do a commit
+    """Create files with annotation of dataset in a clean format
     
     csv_file (str|Path): csv file path with clips names information
-    input_dir: path of directoiry which contains clips
     output_dir: path of directoy dst
     """
 
@@ -26,7 +25,8 @@ def run(csv_file: str|Path,
         data.append((filename, level))
         
     df = pd.DataFrame(data, columns=['filename', 'level'])
-
+    df.to_csv(output_dir/'annotations.csv', index=False)
+    
     # Split the DataFrame into training and testing sets
     train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
     train_df.to_csv(output_dir/'train.csv', index=False) 
